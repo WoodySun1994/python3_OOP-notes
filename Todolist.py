@@ -3,7 +3,7 @@ class todoList:
     def __init__(self, Id, Tag, Memo = ' '):
         todoList.id = Id
         todoList.tag = Tag
-        todoList.time = datetime.date.today()
+        todoList.time = datetime.datetime.today()
         todoList.memo = Memo
 
     def match(self,filter):
@@ -35,6 +35,7 @@ class Listsbook:
 
     def search(self,filter):
         for list in self.Lists:
-            list.match(filter)
+            if list.match(filter):
+                return list
         print("抱歉！没有找到相关日程！")
         return
