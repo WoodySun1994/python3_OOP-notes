@@ -1,4 +1,3 @@
-
 import sys
 from Todolist import todoList,Listsbook
 
@@ -28,23 +27,37 @@ class Menu:
         while True:
             self.show_menu()
             choice = input("请输入你的选择：")
-            choice = self.choices.get(choice)
-            if choice:
-                choice
+            action = self.choices.get(choice)
+            if action:
+                action()
             else:
                 print("{0}并不是一个正确的输入!".format(choice))
 
     def show_lists(self):
-        pass
+        for List in self.listsbook.Lists:
+            print(List.id)
+            print(List.time)
+            print('|' + List.tag + '|   ' + List.memo)
+            print('\n')
 
     def search_lists(self):
-        pass
+        searchmemo = input("请输入查找内容：")
+        self.listsbook.search(searchmemo)
+
     def new_lists(self):
-        pass
+        newtag = input("请输入该日程的标签：")
+        newmemo = input("请输入日程内容：")
+        self.listsbook.newList(newtag,newmemo)
+
     def modify_lists(self):
-        pass
+        modid = input("需要修改的日程id:")
+        modtype = input("请确定要修改的类型：Memo(0)/Tag(1)")
+        modmemo = input("修改后的内容：")
+        self.listsbook.modify(modid,modtype,modmemo)
+
     def quit(self):
-        pass
+        print("欢迎使用todoList日程表！")
+        sys.exit(0)
 
 if __name__ == '__main__':
     Menu().run()
